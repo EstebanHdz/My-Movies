@@ -1,6 +1,6 @@
 export const Globals = {
     apiKey: "f628813c",
-    apiURL: "http://www.omdbapi.com/",
+    apiURL: "https://www.omdbapi.com/",
     toWatchList: "toWatchList",
     watchedList: "watchedList",
     ratingsList: "ratingsList",
