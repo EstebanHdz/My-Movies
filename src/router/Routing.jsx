@@ -1,13 +1,10 @@
 import React from 'react'
 import { Routes, Route, BrowserRouter, Navigate, Link } from "react-router-dom"
-import { ContextProvider } from '../context/ContextProvider'
 import Main from '../components/Main'
-import { MoviesList } from '../components/MoviesList'
 import MainLayout from '../components/layout/MainLayout'
 import Movie from '../components/Movie'
-import { ToWatchList } from '../components/ToWatchList'
-import { WatchedList } from '../components/WatchedList'
 import { MoviesSearchList } from '../components/MoviesSearchList'
+import Error from '../components/Error'
 
 const Routing = () => {
   return (
@@ -21,6 +18,7 @@ const Routing = () => {
                     <Route path="/myToWatchList" element={<MoviesSearchList pageType={"toWatch"}/>}/>
                     <Route path="/myWatchedList" element={<MoviesSearchList pageType={"watched"}/>}/>
                     <Route path="/movie/:id" element={<Movie/>}/>
+                    <Route path="/*" element={<Error/>}/>
                 </Route>
             </Routes>
     </BrowserRouter>

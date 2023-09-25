@@ -355,7 +355,13 @@ const Movie = () => {
 
                             <textarea className="rating-edit-modal__review" name="my-review" id="my-review" placeholder="My review for this movie..." onChange={(e) => setReviewText(e.target.value)} value={reviewText}></textarea>
                             <div className="rating-edit-modal__action-buttons">
-                                <button onClick={() => removeReview(movie)} className="button--secondary rating-edit-modal__action-button rating-edit-modal__action-button--extra" type="button" >Delete Review</button>
+                                {
+                                    movie.review ? 
+                                        <button onClick={() => removeReview(movie)} className="button--secondary rating-edit-modal__action-button rating-edit-modal__action-button--extra" type="button" >Delete Review</button>
+                                    :
+                                        ""
+                                }
+
                             
                                 <label htmlFor="rating-edit-modal__state" className=" rating-edit-modal__action-button button--secondary">Cancel</label>
                                 <input className="button--principal rating-edit-modal__action-button" type="submit" value="Save Review"/>

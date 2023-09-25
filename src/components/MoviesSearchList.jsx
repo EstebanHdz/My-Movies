@@ -3,14 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import useMovie from '../hooks/useMovie'
 import { Globals, validateIsInSearchTypes } from '../helpers/Globals'
 
-import { SaveElement, 
-    RemoveElementById,
-    RetrieveElements, 
-    UpdateElement, 
-    GetToWatchElementsPaginated, 
-    GetWatchedElementsPaginated,
-    RetrieveElementByID, 
-    FetchData } from '../helpers/LocalStorageHelper'
+import { FetchData } from '../helpers/LocalStorageHelper'
 import Pager from './Pager'
 import MoviePill from './MoviePill'
 import useAddRemoveFromMyList from '../hooks/useAddRemoveFromMyList'
@@ -22,12 +15,11 @@ export const MoviesSearchList = ({pageType}) => {
     const [query, setQuery] = useState("")
     const [resultList, setResultList] = useState([])
     const [currentPage, setCurrentPage] = useState(1)
-    const [pagesList, setPagesList] = useState([])
     const [sortType, setSortType] = useState("dateAsc")
 
     const [searchType, setSearchType] = useState("")
 
-    const [totalResults, setTotalResults] = useState(0)
+    const [totalPages, setTotalPages] = useState(1)
     
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
@@ -41,34 +33,23 @@ export const MoviesSearchList = ({pageType}) => {
     const searchNavigate = useNavigate()
 
     const location = useLocation()
-    const {
-            addToMyList, 
-            removeFromToWatch,
-            removeFromWatched,
-            getToWatchFromMyList,
-            getWatchedFromMyList} = useMovie()
+    const {getWatchedFromMyList, getToWatchFromMyList} = useMovie()
 
 
     
 
     const resetPages = () => {
-        setPagesList([1])
         setCurrentPage(1)
+        setTotalPages(1)
     }
     
     const setPages = (totalRes) => {
-        let results = Math.ceil(totalRes / 10)
-        setTotalResults(results)
-        let newPagesList = []
-        for(let i = 1; i <= results;  i++){
-            newPagesList.push(i)
-        }
-        setPagesList(newPagesList)
+        setTotalPages(Math.ceil(totalRes / 10))
     }
 
-    const fetchSearchResults = async (q, p = 1, t = "", s = null) => {
-        let res = []
-
+    const fetchSearchResults = async (q, p = 1, t = "", s = "dateAsc") => {
+        let res = {}
+        console.log(s);
         switch (pageType) {
             case "search":
                 if(searchType === "all"){
@@ -87,7 +68,6 @@ export const MoviesSearchList = ({pageType}) => {
                 }
 
                 setResultList(res.Search)
-                setTotalResults(res.totalResults)
                 setPages(res.totalResults)
                 setSearchType(t)
                 break;
@@ -96,17 +76,26 @@ export const MoviesSearchList = ({pageType}) => {
             case "toWatch":
                 console.log("toWatch");
                 res = getToWatchFromMyList(p, t, s)
-                setResultList(res.Search)
-                setTotalResults(res.totalResults)
-                setPages(res.totalResults)
+                console.log(res.length);
+                if(res.Search){
+                    setResultList(res.Search)
+                    setPages(res.totalResults)
+                }else{
+                    setResultList([])
+                    setError({Error: "No movies in your list...", Response: "False"})
+                }
                 break;
 
             case "watched":
                 console.log("watched");
                 res = getWatchedFromMyList(p, t, s)
-                setResultList(res.Search)
-                setTotalResults(res.totalResults)
-                setPages(res.totalResults)
+                if(res.Search){
+                    setResultList(res.Search)
+                    setPages(res.totalResults)
+                }else{
+                    setResultList([])
+                    setError({Error: "No movies in your list...", Response: "False"})
+                }
                 break;
             
             default:
@@ -138,7 +127,6 @@ export const MoviesSearchList = ({pageType}) => {
                 setCurrentPage(newPage)
                 res = getToWatchFromMyList(newPage, searchType, sortType)
                 setResultList(res.Search)
-                setTotalResults(res.totalResults)
                 setPages(res.totalResults)
                 break;
 
@@ -147,7 +135,6 @@ export const MoviesSearchList = ({pageType}) => {
                 setCurrentPage(newPage)
                 res = getWatchedFromMyList(newPage, searchType, sortType)
                 setResultList(res.Search)
-                setTotalResults(res.totalResults)
                 setPages(res.totalResults)
                 break;
             
@@ -155,106 +142,7 @@ export const MoviesSearchList = ({pageType}) => {
                 break;
         }
     }
-
-    const addRemoveFromMyList = (action, element, list) => {
-        
-        //let updatedElement = {...element}
-        let updatedElement = {...element}
-
-        if(action === "add"){
-
-            if(list === "watched"){
-                updatedElement.watched = true
-            }else if(list === "toWatch"){
-                updatedElement.toWatch = true
-            }
-
-            addToMyList(element, list)
-        }else{
-            if(list === "watched"){
-                updatedElement.watched = false
-                removeFromWatched(element)
-            }else if(list === "toWatch"){
-                updatedElement.toWatch = false
-                removeFromToWatch(element)
-            }
-        }
-
-        let index = resultList.findIndex((element) => {
-            return element.imdbID === updatedElement.imdbID
-        })
-        resultList.splice(index, 1, updatedElement)
-
-        setResultList(resultList)
-    }
-
-    const searchAll = () => {
-        resetPages()
-        //setSearchType(Globals.allTypeString)
-        let res = []
-        switch (pageType) {
-            case "search":
-                searchNavigate("/search?query=" + query + "&page=1&type=" + Globals.allTypeString)
-                break;
-                
-            case "toWatch":
-                searchNavigate("/myToWatchList?page=1&type=" + Globals.allTypeString)
-                break;
-
-            case "watched":
-                
-                searchNavigate("/myWatchedList?page=1&type=" + Globals.allTypeString)
-                break;
-            
-            default:
-                break;
-        }
-    }
-
-    const searchMovies = () => {
-        resetPages()
-        //setSearchType(Globals.moviesTypeString)
-        let res = []
-        switch (pageType) {
-            case "search":
-                searchNavigate("/search?query=" + query + "&page=1&type=" + Globals.moviesTypeString)
-                break;
-                
-            case "toWatch":
-                searchNavigate("/myToWatchList?page=1&type=" + Globals.moviesTypeString)
-                break;
-
-            case "watched":
-                searchNavigate("/myWatchedList?page=1&type=" + Globals.moviesTypeString)
-                break;
-            
-            default:
-                break;
-        }
-    }
-
-    const searchSeries = () => {
-        resetPages()
-        let res = []
-        //setSearchType(Globals.seriesTypeString)
-        switch (pageType) {
-            case "search":
-                searchNavigate("/search?query=" + query + "&page=1&type=" + Globals.seriesTypeString)
-                break;
-                
-            case "toWatch":
-                searchNavigate("/myToWatchList?page=1&type=" + Globals.seriesTypeString)
-                break;
-
-            case "watched":
-                searchNavigate("/myWatchedList?page=1&type=" + Globals.seriesTypeString)
-                break;
-            
-            default:
-                break;
-        }
-    }
-
+    
     const searchBy = (type) => {
         setLoading(true)
         resetPages()
@@ -280,12 +168,13 @@ export const MoviesSearchList = ({pageType}) => {
     useEffect(() => {
         setLoading(true)
         setError(false)
+        setSortType("dateAsc")
         const queryParameters = new URLSearchParams(window.location.search)
         let queryParam = queryParameters.get("query")
         let pageParam = queryParameters.get("page") ? parseInt(queryParameters.get("page")) : 1 
         let typeParam = queryParameters.get("type") ? queryParameters.get("type"): ""
 
-        setPagesList([])
+        setTotalPages(1)
 
         if(queryParam !== query && queryParam){
 
@@ -356,10 +245,12 @@ export const MoviesSearchList = ({pageType}) => {
                                                 <input id="collapsible-menu" className="collapsible-menu" type="checkbox"/>
                                                 <label htmlFor="collapsible-menu" className="button--list-option filters-option--last">Sort By <i className="fa-solid fa-caret-down"></i></label> 
                                                 <ul className="dropdown__menu">
+                                                    <li className = {sortType === "dateAsc" ? "active" : ""}><button  onClick={() => filterSearch("dateAsc")}>Newest Added</button></li>
+                                                    <li className = {sortType === "dateDesc" ? "active" : ""}><button  onClick={() => filterSearch("dateDesc")}>Oldest Added</button></li>
                                                     <li className = {sortType === "nameAsc" ? "active" : ""}><button onClick={() => filterSearch("nameAsc")}>Name Asc.</button></li>
                                                     <li className = {sortType === "nameDesc" ? "active" : ""}><button  onClick={() => filterSearch("nameDesc")}>Name Desc.</button></li>
-                                                    <li className = {sortType === "dateAsc" ? "active" : ""}><button  onClick={() => filterSearch("dateAsc")}>Date Added Asc.</button></li>
-                                                    <li className = {sortType === "dateDesc" ? "active" : ""}><button  onClick={() => filterSearch("dateDesc")}>Date Added Desc.</button></li>
+                                                    <li className = {sortType === "ratingAsc" ? "active" : ""}><button  onClick={() => filterSearch("ratingAsc")}>Best Rated</button></li>
+                                                    <li className = {sortType === "ratingDesc" ? "active" : ""}><button  onClick={() => filterSearch("ratingDesc")}>Worst Rated</button></li>
                                                 </ul>
                                             </li>
                                         :
@@ -375,7 +266,7 @@ export const MoviesSearchList = ({pageType}) => {
                                 {
                                     error ?
                                         <div className='error-header'>
-                                            <h1>No results found!</h1>
+                                            <h1>{error.Error}</h1>
                                             <h2>Try Searching <br/> something else...</h2>
                                         </div>    
                                     : (
@@ -392,9 +283,9 @@ export const MoviesSearchList = ({pageType}) => {
                             <div className="search-results__filters">
                             <ul className="search-results__filters-list">
                                 {
-                                    pagesList.length > 0 ? 
+                                    totalPages > 0 ? 
                                         //renderPager()
-                                        <Pager currentPage={currentPage} changePage={updatePager} pagesList={pagesList}/>
+                                        <Pager currentPage={currentPage} changePage={updatePager} totalPages={totalPages}/>
                                     :
                                     ""
                                 }

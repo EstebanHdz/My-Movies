@@ -1248,5 +1248,18 @@ body {
     letter-spacing: .3rem;
     opacity: .8;
 }
+.error-header a{
+    text-decoration: none;
+    color: #f56ecc;
+    font-size: 2rem;
+    font-weight: lighter;
+    letter-spacing: .4rem;
+}
+.error-header a :hover{
+    text-decoration: underline;
+    color: #f56ecc;
+    font-size: 2rem;
+    font-weight: lighter;
+}
 
 /*# sourceMappingURL=styles.css.map */

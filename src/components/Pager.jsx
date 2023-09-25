@@ -1,11 +1,13 @@
 import React from 'react'
 
-const Pager = ({currentPage, changePage, pagesList}) => {
+const Pager = ({currentPage, changePage, totalPages}) => {
 
     const renderPager = () => {
         let pager = []
 
-        if(pagesList.length == 1){
+        //if(pagesList.length == 1){
+        if(totalPages === 1){
+            console.log(totalPages);
             return <li key={"pagerOption"+1} className="search-results__filters-option">
                     <button onClick={() => changePage(1)} className={"button--list-option " + (1 == currentPage ? "button--list-option--active" : "")}>1</button> 
                 </li>
@@ -38,8 +40,10 @@ const Pager = ({currentPage, changePage, pagesList}) => {
         }
 
 
-        for(let i of pagesList){
-            if(  i != 1 && i != pagesList.length && (i >= lowerOffset && i <= upperOffset)){
+        //for(let i of pagesList){
+        for(let i = 2; i < totalPages; i++){
+            //if(  i != 1 && i != pagesList.length && (i >= lowerOffset && i <= upperOffset)){
+            if(i >= lowerOffset && i <= upperOffset){
                 pager.push(
                     <li key={"pagerOption"+i} className="search-results__filters-option">
                         <button onClick={() => changePage(i)} className={"button--list-option " + (i == currentPage ? "button--list-option--active" : "")}>{i}</button> 
@@ -49,7 +53,8 @@ const Pager = ({currentPage, changePage, pagesList}) => {
             
         }
         
-        if(upperOffset < pagesList.length ){
+        //if(upperOffset < pagesList.length ){
+        if(upperOffset < totalPages ){
             pager.push(
                 <li key={"pagerOptionExtraN"} className="search-results__filters-option">
                     <button className={"button--list-option "}>...</button> 
@@ -58,12 +63,15 @@ const Pager = ({currentPage, changePage, pagesList}) => {
         }
 
         pager.push(
-            <li key={"pagerOption"+pagesList.length} className="search-results__filters-option">
-                <button onClick={() => changePage(pagesList.length)} className={"button--list-option " + (pagesList.length == currentPage ? "button--list-option--active" : "")}>{pagesList.length}</button> 
+            /*<li key={"pagerOption"+pagesList.length} className="search-results__filters-option">*/
+            <li key={"pagerOption"+totalPages} className="search-results__filters-option">
+                {/*<button onClick={() => changePage(pagesList.length)} className={"button--list-option " + (pagesList.length == currentPage ? "button--list-option--active" : "")}>{pagesList.length}</button>*/}
+                <button onClick={() => changePage(totalPages)} className={"button--list-option " + (totalPages == currentPage ? "button--list-option--active" : "")}>{totalPages}</button> 
             </li>
         )
 
-        if(currentPage < pagesList.length){
+        //if(currentPage < pagesList.length){
+        if(currentPage < totalPages){
             pager.push(
                 <li key={"pagerNavNext"} className="search-results__filters-option">
                     <button onClick={() => changePage(currentPage + 1)} className="button--list-option">Next</button> 

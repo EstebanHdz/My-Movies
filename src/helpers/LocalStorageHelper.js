@@ -212,6 +212,7 @@ const GetToWatchElementsPaginated = (key, page, type = null, sort = null) => {
     let elementList = JSON.parse(localStorage.getItem(key))
     let filteredList = []
     let response = {Search: [], totalResults: 0}
+
     if(!elementList){
         return []
     }
@@ -222,10 +223,10 @@ const GetToWatchElementsPaginated = (key, page, type = null, sort = null) => {
         }
     })
     
-
     if(!type && !sort){
         response.totalResults = filteredList.length
         response.Search = filteredList.slice((page * 10) - 10, page * 10)
+        console.log(response);
         return response
     }
     
@@ -253,7 +254,6 @@ const GetToWatchElementsPaginated = (key, page, type = null, sort = null) => {
     }
 
 
-
     if(sort){
         switch(sort){
             case "nameAsc":
@@ -270,13 +270,31 @@ const GetToWatchElementsPaginated = (key, page, type = null, sort = null) => {
             
             case "dateAsc":
                 filteredList = filteredList.sort((a, b) => {
-                    return a.addedToToWatch - b.addedToToWatch
+                    return b.addedToToWatch - a.addedToToWatch
                 })
                 break;
             
             case "dateDesc":
                 filteredList = filteredList.sort((a, b) => {
-                    return b.addedToToWatch - a.addedToToWatch
+                    return a.addedToToWatch - b.addedToToWatch
+                })
+                break;
+
+            case "ratingAsc":
+                filteredList = filteredList.sort((a, b) => {
+                    if(!a.review || !b.review){
+                        return -6
+                    }
+                    return b.review.rating - a.review.rating
+                })
+                break;
+
+            case "ratingDesc":
+                filteredList = filteredList.sort((a, b) => {
+                    if(!a.review || !b.review){
+                        return 6
+                    }
+                    return a.review.rating - b.review.rating
                 })
                 break;
         }
@@ -302,6 +320,7 @@ const GetWatchedElementsPaginated = (key, page, type = null, sort = null) => {
         }
     })
 
+    console.log(sort);
     if(!type && !sort){
         response.totalResults = filteredList.length
         response.Search = filteredList.slice((page * 10) - 10, page * 10)
@@ -330,6 +349,7 @@ const GetWatchedElementsPaginated = (key, page, type = null, sort = null) => {
         }
     }
 
+    console.log(sort);
     if(sort){
         switch(sort){
             case "nameAsc":
@@ -346,16 +366,33 @@ const GetWatchedElementsPaginated = (key, page, type = null, sort = null) => {
             
             case "dateAsc":
                 filteredList = filteredList.sort((a, b) => {
-                    return a.addedToWatched - b.addedToWatched
+                    return b.addedToWatched - a.addedToWatched
                 })
                 break;
             
             case "dateDesc":
                 filteredList = filteredList.sort((a, b) => {
-                    return b.addedToWatched - a.addedToWatched
+                    return a.addedToWatched - b.addedToWatched
                 })
                 break;
-            
+
+            case "ratingAsc":
+                filteredList = filteredList.sort((a, b) => {
+                    if(!a.review || !b.review){
+                        return -6
+                    }
+                    return b.review.rating - a.review.rating
+                })
+                break;
+
+            case "ratingDesc":
+                filteredList = filteredList.sort((a, b) => {
+                    if(!a.review || !b.review){
+                        return 6
+                    }
+                    return a.review.rating - b.review.rating
+                })
+                break;
         }
     }
     response.totalResults = filteredList.length

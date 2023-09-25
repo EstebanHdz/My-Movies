@@ -109,10 +109,10 @@ const useMovie = () => {
         return RetrieveElementByID(Globals.myListName, id)
     }
 
-    const getWatchedFromMyList = (page, type = null, sort = null) => {
+    const getWatchedFromMyList = (page, type = null, sort = "dateAsc") => {
         return GetWatchedElementsPaginated(Globals.myListName, page, type, sort)
     }
-    const getToWatchFromMyList = (page, type = null, sort = null) => {
+    const getToWatchFromMyList = (page, type = null, sort = "dateAsc") => {
         return GetToWatchElementsPaginated(Globals.myListName, page, type, sort)
     }
 
