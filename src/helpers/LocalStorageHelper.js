@@ -83,7 +83,7 @@ const updateResultElement = (res) => {
 
     let newMovie = {...res}
 
-    if(newMovie.Poster === "N/A"){
+    /*if(newMovie.Poster === "N/A"){
         switch (newMovie.Type) {
             case Globals.moviesTypeString:
                 newMovie.Poster = "/src/assets/imgs/movieDefault.jpg"
@@ -100,7 +100,7 @@ const updateResultElement = (res) => {
             default:
                 break;
         }
-    }
+    }*/
 
     newMovie = cleanJSONResponse(newMovie)
 

@@ -1,5 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { Globals } from '../helpers/Globals'
+
+
+import MovieDefault from "../assets/imgs/movieDefault.jpg"
+import SeriesDefault from "../assets/imgs/seriesDefault.jpg"
+import GameDefault from "../assets/imgs/gameDefault.jpg"
 
 const MoviePill = ({
     resultList,
@@ -9,7 +15,28 @@ const MoviePill = ({
     removeWatched}) => {
 
 
-
+    const getPoster = (poster, type) => {
+        console.log(type);
+        if(poster === "N/A"){
+            switch (type) {
+                case Globals.moviesTypeString:
+                    return MovieDefault
+                    break;
+    
+                case Globals.seriesTypeString:
+                    return SeriesDefault
+                    break;
+    
+                case Globals.gamesTypeString:
+                    return GameDefault
+                    break;
+            
+                default:
+                    break;
+            }
+        }
+        return poster
+    }
 
     let arr = resultList.map((element, index) => {
 
@@ -17,7 +44,7 @@ const MoviePill = ({
         return (
             <article className="movie-card" key={index}>
                 <div className="movie-card__image-container">
-                    <img src={element.Poster} alt="" className="movie-card__image" />
+                    <img src={getPoster(element.Poster, element.type)} alt="" className="movie-card__image" />
                 </div>
                 <section className="movie-card__content">
                     <h4 className="movie-card__type">{element.Type}</h4>
