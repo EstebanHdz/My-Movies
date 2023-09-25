@@ -1,0 +1,91 @@
+@media (width <= 1440px) {
+    .main .main__hero .hero__search-bar{
+        width: 85%
+    }
+
+    .main .main__hero .hero__logo-container .hero__logo-title {
+        width: 90%;
+    }
+
+    .main .main__hero .hero__logo-container h3 {
+        width: 80%;
+        text-align: center;
+    }
+}
+
+@media (width <= 1100px) {
+    .main .main__hero {
+        gap: 0rem;
+    }
+
+    .main .main__hero .hero__logo-container .logo-img {
+        height: 8rem;
+    }
+    .main .main__hero .hero__logo-container .hero__logo-title {
+        font-size: 3rem;
+    }
+    .button--secondary {
+        font-size: 1.6rem;
+      }
+}
+@media (width <= 920px) {
+    .main .main__hero .hero__menu-container {
+        flex-direction: column;
+        width: 85%;
+      }
+    .main .main__hero .hero__search-bar .search-bar__form .search-bar__search-input {
+        font-size: 1.2rem;
+      }
+}
+@media (width <= 700px) {
+    .main .main__hero {
+        height: 80vh;
+      }
+    .main .main__hero .hero__search-bar {
+        align-self: center;
+        justify-content: center;
+        display: flex;
+        flex-direction: row;
+        margin: 2rem 0;
+        height: auto;
+        width: 85%;
+      }
+
+    .main .main__hero .hero__search-bar .search-bar__form {
+        flex-direction: column;
+      }
+
+      .main .main__hero .hero__search-bar .search-bar__form .search-bar__search-input {
+        padding: .4rem;
+        padding-left: 2rem;
+        font-size: 1.8rem;
+        border: 1px solid #A32F80;
+        border-radius: 1rem 1rem 0 0rem;
+        flex-grow: 1;
+        width: auto;
+        height: 3.5rem;
+      }
+      .main .main__hero .hero__search-bar .search-bar__form .search-bar__search-button {
+        width: 100%;
+        background-color: #A32F80;
+        color: #f1f1f1;
+        border: none;
+        text-align: center;
+        border-radius: 0 0 1rem 1rem;
+        transition: all 300ms ease-out;
+      }
+      
+    .main .main__hero .hero__menu-container {
+        flex-direction: column;
+        width: 85%;
+      }
+      .main .main__hero .hero__search-bar .search-bar__form .search-bar__search-button i {
+    }
+      .main .main__hero .hero__search-bar .search-bar__form .search-bar__search-button i{
+        content: "Search";
+        font-size: 1.5rem;
+    }
+    .main .main__hero .hero__search-bar .search-bar__form .search-bar__search-input {
+        font-size: 1.3rem;
+      }
+}
