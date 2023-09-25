@@ -4,6 +4,11 @@ import { useParams, useLocation } from 'react-router-dom'
 import useMovie from '../hooks/useMovie'
 import useAddRemoveFromMyList from '../hooks/useAddRemoveFromMyList'
 
+
+import MovieDefault from "../assets/imgs/movieDefault.jpg"
+import SeriesDefault from "../assets/imgs/seriesDefault.jpg"
+import GameDefault from "../assets/imgs/gameDefault.jpg"
+
 const Movie = () => {
 
     const location = useLocation()
@@ -57,6 +62,29 @@ const Movie = () => {
         return m
     }
 
+
+    const getPoster = (poster, type) => {
+        console.log(type);
+        if(poster === "N/A"){
+            switch (type) {
+                case Globals.moviesTypeString:
+                    return MovieDefault
+                    break;
+    
+                case Globals.seriesTypeString:
+                    return SeriesDefault
+                    break;
+    
+                case Globals.gamesTypeString:
+                    return GameDefault
+                    break;
+            
+                default:
+                    break;
+            }
+        }
+        return poster
+    }
 
     const submitReview = (e) => {
         e.preventDefault()
@@ -148,7 +176,7 @@ const Movie = () => {
 
                         <>
                             <div className="movie__img-container">
-                                <img className="movie__img" src={movie.Poster} alt=""/>
+                                <img className="movie__img" src={getPoster(movie.Poster, movie.Type)} alt=""/>
                             </div>
                             <div className="movie__info-container">
 
