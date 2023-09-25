@@ -43,7 +43,7 @@ const updateResultList = (resList = null) => {
 
         let newElement = {...element}
 
-        if(newElement.Poster === "N/A"){
+        /*if(newElement.Poster === "N/A"){
             switch (newElement.Type) {
                 case Globals.moviesTypeString:
                     newElement.Poster = "/src/assets/imgs/movieDefault.jpg"
@@ -60,7 +60,7 @@ const updateResultList = (resList = null) => {
                 default:
                     break;
             }
-        }
+        }*/
 
         if(m){
             newElement.watched = m.watched
@@ -83,24 +83,27 @@ const updateResultElement = (res) => {
 
     let newMovie = {...res}
 
-    /*if(newMovie.Poster === "N/A"){
+    if(newMovie.Poster === "N/A"){
         switch (newMovie.Type) {
             case Globals.moviesTypeString:
-                newMovie.Poster = "/src/assets/imgs/movieDefault.jpg"
+                //newMovie.Poster = "/src/assets/imgs/movieDefault.jpg"
+                newMovie.Poster = "https://github.com/EstebanHdz/movies-imgs/blob/master/imgs/movieDefault.jpg?raw=true"
                 break;
 
             case Globals.seriesTypeString:
-                newMovie.Poster = "/src/assets/imgs/seriesDefault.jpg"
+                //newMovie.Poster = "/src/assets/imgs/seriesDefault.jpg"
+                newMovie.Poster = "https://github.com/EstebanHdz/movies-imgs/blob/master/imgs/seriesDefault.jpg?raw=true"
                 break;
 
             case Globals.gamesTypeString:
-                newMovie.Poster = "/src/assets/imgs/gameDefault.jpg"
+                //newMovie.Poster = "/src/assets/imgs/gameDefault.jpg"
+                newMovie.Poster = "	https://github.com/EstebanHdz/movies-imgs/blob/master/imgs/gameDefault.jpg?raw=true"
                 break;
         
             default:
                 break;
         }
-    }*/
+    }
 
     newMovie = cleanJSONResponse(newMovie)
 

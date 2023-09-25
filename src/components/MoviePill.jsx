@@ -44,7 +44,7 @@ const MoviePill = ({
         return (
             <article className="movie-card" key={index}>
                 <div className="movie-card__image-container">
-                    <img src={getPoster(element.Poster, element.type)} alt="" className="movie-card__image" />
+                    <img src={getPoster(element.Poster, element.Type)} alt="" className="movie-card__image" />
                 </div>
                 <section className="movie-card__content">
                     <h4 className="movie-card__type">{element.Type}</h4>
