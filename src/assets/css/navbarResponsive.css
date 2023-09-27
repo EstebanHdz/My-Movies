@@ -1,0 +1,110 @@
+@media (width <= 850px) {
+    .main__navbar{
+    }
+    .main .main__navbar{
+        overflow:visible;
+        box-shadow: none;
+    }
+    .main .main__navbar .navbar__search-bar{
+        display:none;
+    }
+    .main .main__navbar .navbar__menu-container{
+        display:none;
+    }
+    .main .main__navbar .navbar__items-container .menu-container__items-list{
+        flex-direction: column;
+    }
+    .main .navbar__responsive-container{
+        display: none; 
+        top: 9rem;
+        background-color: rgba(19, 11, 35, 0.8);
+        backdrop-filter: blur(5px);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 0rem 5rem;
+        position:fixed;
+        width: 100%;
+        overflow: hidden;
+        box-sizing: border-box;
+        opacity: 1;
+        box-shadow: 0 3rem 32px 10px rgba(19, 11, 35, 0.7);
+        height: 60vh;
+        z-index: 999999;
+        
+    }
+    .menu-items__collapsible-toggle-button{
+        display:inherit;
+        margin-right: 4rem;
+    }
+    .navbar__logo-container{
+        margin-left: 2rem;
+    }
+    .menu-items__item-responsive{
+        margin-top: 3rem;
+    }
+    .menu-items__item-responsive a{
+        font-size: 3rem;
+    }
+    .menu-container__items-list{
+        padding-left: 0;
+    }
+}
+
+@media (width <= 700px) {
+    .main .main__hero {
+        height: 80vh;
+        width: 75vw;
+      }
+    .main .main__hero .hero__search-bar {
+        align-self: center;
+        justify-content: center;
+        display: flex;
+        flex-direction: row;
+        margin: 2rem 0;
+        height: auto;
+        width: 85%;
+      }
+
+    .search-bar__form {
+        flex-direction: column;
+      }
+
+    .search-bar__form .search-bar__search-input {
+        padding: .4rem;
+        padding-left: 2rem;
+        font-size: 1.8rem;
+        border: 1px solid #A32F80;
+        border-radius: 1rem 1rem 0 0rem;
+        flex-grow: 1;
+        width: auto;
+        height: 3.5rem;
+        text-align: center;
+      }
+    .search-bar__form .search-bar__search-button {
+        width: 100%;
+        background-color: #A32F80;
+        color: #f1f1f1;
+        border: none;
+        text-align: center;
+        border-radius: 0 0 1rem 1rem;
+        transition: all 300ms ease-out;
+      }
+      
+    .search-bar__form .search-bar__search-button i{
+        content: "Search";
+        font-size: 1.5rem;
+    }
+    .search-bar__form .search-bar__search-input {
+        font-size: 1.3rem;
+      }
+}
+@media (width <= 550px) {
+    .main .main__navbar .navbar__logo-container{
+        flex-direction: row;
+    }
+    .main .main__navbar .navbar__logo-container .navbar__logo-title{
+        margin-left: 1.3rem;
+        text-align: start;
+    }
+}

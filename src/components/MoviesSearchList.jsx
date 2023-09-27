@@ -235,13 +235,13 @@ export const MoviesSearchList = ({pageType}) => {
                                     <li className="search-results__filters-option">
                                         <button onClick={() => searchBy(Globals.moviesTypeString)} className={"button--list-option " +  (searchType === Globals.moviesTypeString ? "button--list-option--active" : "")}>Movies</button> 
                                     </li>
-                                    <li className="search-results__filters-option">
+                                    <li className="search-results__filters-option ">
                                         <button onClick={() => searchBy(Globals.seriesTypeString)} className={"button--list-option " +  (searchType === Globals.seriesTypeString ? "button--list-option--active" : "")}>Series</button> 
                                     </li>
 
                                     {
                                         pageType != "search"?
-                                            <li className="search-results__filters-option">
+                                            <li className="search-results__filters-option search-results__filters-option--last">
                                                 <input id="collapsible-menu" className="collapsible-menu" type="checkbox"/>
                                                 <label htmlFor="collapsible-menu" className="button--list-option filters-option--last">Sort By <i className="fa-solid fa-caret-down"></i></label> 
                                                 <ul className="dropdown__menu">

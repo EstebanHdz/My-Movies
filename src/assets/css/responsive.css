@@ -13,6 +13,30 @@
     }
 }
 
+@media (width <= 1240px) {
+    .button-toolkit--light {
+        font-size: 0rem;
+      }
+    .button-toolkit--light .rating-edit-modal__label{
+        font-size: 0rem;
+      }
+    .button-toolkit--light  i{
+        margin: 0rem;
+        font-size: 3rem;
+      }
+      .main .movie__rating-element {
+        flex-grow: 2;
+      }
+      .main .movie__rating-element p{
+        font-size: 2rem;
+      }
+    .movie__rating-element--main{
+        margin-bottom: 1.5rem;
+    }
+    .movie__rating-element--main p{
+        font-size: 3.8rem !important;
+    }
+}
 @media (width <= 1100px) {
     .main .main__hero {
         gap: 0rem;
@@ -28,7 +52,73 @@
         font-size: 1.6rem;
       }
 }
+@media (width <= 1060px) {
+    .main .movie__quick-info h1{
+        font-size: 4rem;
+    }
+    .main .movie {
+        box-sizing: content-box;
+        margin: 14rem 0;
+        background: rgba(241, 241, 241, 0.1);
+        width: 80vw;
+        padding: 3rem 3rem;
+        box-shadow: 0 8px 32px 10px rgba(19, 11, 35, 0.3);
+        border: 1px solid rgba(241, 241, 241, 0.2);
+        border-radius: 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: center;
+        gap: 4rem;
+        color: #f1f1f1;
+      }
+      .main .movie__img-container {
+        max-height: 20%;
+        overflow: hidden;
+      }
+      .main .movie__img {
+        position: relative;
+        object-fit:cover;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        margin: auto 0;
+        align-self: center;
+      }
+    .button-toolkit--light {
+        font-size: 1.6rem;
+      }
+    .button-toolkit--light .rating-edit-modal__label{
+        font-size: 1.6rem;
+      }
+    .button-toolkit--light  i{
+        margin: 0rem;
+        font-size: 2rem;
+        margin-right: 1rem;
+      }
+      .main .movie__rating-element {
+        margin-top: 1rem;
+        opacity: .6;
+      }
+      .main .movie__rating-element p{
+        font-size: 1.6rem;
+      }
+    .movie__rating-element--main{
+        margin-bottom: 1.5rem;
+    }
+    .movie__rating-element--main{
+        font-size: 3.8rem !important;
+        opacity: 1 !important;
+    }
+}
 @media (width <= 920px) {
+    .button-toolkit--light  i{
+        margin: 0rem;
+        font-size: 2rem;
+      }
+    .main .main__hero {
+        width: 65vw;
+      }
     .main .main__hero .hero__menu-container {
         flex-direction: column;
         width: 85%;
@@ -37,9 +127,42 @@
         font-size: 1.2rem;
       }
 }
+@media (width <= 850px) {
+    .search-results__title *{
+        font-size: 3.2rem;
+    }
+    .main .search-results{
+        padding: 7rem 2rem;
+    }
+    .button-toolkit--light {
+        font-size: 0rem;
+      }
+    .button-toolkit--light .rating-edit-modal__label{
+        font-size: 0rem;
+      }
+      .button-toolkit--light i{
+        font-size: 3rem;
+      }
+}
 @media (width <= 700px) {
+    .main .movie__header {
+        flex-direction: column;
+      }
+    .main .movie__rating-list {
+        flex-direction: row;
+      }
+      .main .movie__rating-element {
+        flex-grow: 2;
+        flex-basis: 20%;
+        align-content: center;
+        justify-content: center;
+      }
+    .main-title--higlight {
+        color: #A32F80;
+      }
     .main .main__hero {
         height: 80vh;
+        width: 75vw;
       }
     .main .main__hero .hero__search-bar {
         align-self: center;
@@ -64,6 +187,7 @@
         flex-grow: 1;
         width: auto;
         height: 3.5rem;
+        text-align: center;
       }
       .main .main__hero .hero__search-bar .search-bar__form .search-bar__search-button {
         width: 100%;
@@ -79,13 +203,39 @@
         flex-direction: column;
         width: 85%;
       }
-      .main .main__hero .hero__search-bar .search-bar__form .search-bar__search-button i {
-    }
       .main .main__hero .hero__search-bar .search-bar__form .search-bar__search-button i{
         content: "Search";
         font-size: 1.5rem;
     }
     .main .main__hero .hero__search-bar .search-bar__form .search-bar__search-input {
         font-size: 1.3rem;
+      }
+
+    .main .search-results__filters-list{
+        padding: 0;
+        padding-top: 1rem;
+    }
+
+    .main .search-results__filters-option > button {
+        font-size: 2rem;
+      }
+      
+    .filters-option--last {
+        margin-left: 0rem;
+        font-size: 2rem;
+        position: relative;
+        overflow: visible;
+      }
+      .main .movie__main-info {
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .main .movie__main-info-element {
+        padding: 1rem 1.5rem;
+      }
+      .main .movie__main-info-element h4{
+        font-size: 1.6rem;
       }
 }

@@ -10,6 +10,8 @@ const Header = () => {
 
     const searchNavigate = useNavigate()
 
+    let hamburgerActive =  false
+
     const updateSearch = (e) =>{
         setQueryValue(e.target.value);
     }
@@ -17,6 +19,23 @@ const Header = () => {
     const search = (e) =>{
         e.preventDefault()
         searchNavigate("/search?query="+queryValue+"&page=1")
+    }
+
+    const updateClass = () => {
+        console.log("update");
+        if(!hamburgerActive){
+            
+            document.getElementById("hamburger-menu").classList.add("fa-x")
+            document.getElementById("hamburger-menu").classList.remove("fa-bars")
+            document.getElementById("navbar__responsive-container").style.display = "inherit"
+
+        }else{
+            
+            document.getElementById("hamburger-menu").classList.remove("fa-x")
+            document.getElementById("hamburger-menu").classList.add("fa-bars")
+            document.getElementById("navbar__responsive-container").style.display = "none"
+        }
+        hamburgerActive = !hamburgerActive
     }
 
     useEffect(() => {
@@ -31,7 +50,8 @@ const Header = () => {
     }, [location])
     
     return (
-        <nav className="main__navbar">
+        <>
+        <nav className="main__navbar" id="main__navbar">
             <div className="navbar__logo-container">
                 <NavLink className="navbar__logo-container" to="/">
                     <img src={Logo} alt="" className="logo-img"/>
@@ -39,27 +59,53 @@ const Header = () => {
                 </NavLink>
             </div>
 
-            <div className="navbar__search-bar">
-                <form onSubmit={search} className="search-bar__form">
-                    <input className="search-bar__search-input" type="text" name="navbar-searchbar" id="" placeholder="Search Movies or Series" onChange={updateSearch} value={queryValue}/>
-                    {/*<input className="search-bar__search-button" type="submit" value="&#xf002"/>*/}
-                    <button type="submit" className="search-bar__search-button"><i className="fa-solid fa-magnifying-glass search-bar__search"></i></button>
-                </form>
-            </div>
 
-            <div className="navbar__menu-container">
-                <ul className="menu-container__items-list">
-                    <li className={"menu-container__item " + (location.pathname === "/myToWatchList" ? "menu-link--active" : "")} >
-                        <NavLink to="/myToWatchList" className="">To Watch List</NavLink>
-                        <i className="fa-solid fa-circle"></i>
-                    </li>
-                    <li className={"menu-items__item " + (location.pathname === "/myWatchedList" ? "menu-link--active" : "")}>
-                        <NavLink to="/myWatchedList" className="menu-link">Watched List</NavLink>
-                        <i className="fa-solid fa-circle"></i>
-                    </li>
-                </ul>
-            </div>
+                <div className="navbar__search-bar">
+                    <form onSubmit={search} className="search-bar__form">
+                        <input className="search-bar__search-input" type="text" name="navbar-searchbar" id="" placeholder="Search Movies or Series" onChange={updateSearch} value={queryValue}/>
+                        {/*<input className="search-bar__search-button" type="submit" value="&#xf002"/>*/}
+                        <button type="submit" className="search-bar__search-button"><i className="fa-solid fa-magnifying-glass search-bar__search"></i></button>
+                    </form>
+                </div>
+
+                <div className="navbar__menu-container">
+                    <ul className="menu-container__items-list">
+                        <li className={"menu-items__item  " + (location.pathname === "/myToWatchList" ? "menu-link--active" : "")} >
+                            <NavLink to="/myToWatchList" className="">ToWatch List</NavLink>
+                            <i className="fa-solid fa-circle menu-item__icon"></i>
+                        </li>
+                        <li className={"menu-items__item " + (location.pathname === "/myWatchedList" ? "menu-link--active" : "")}>
+                            <NavLink to="/myWatchedList" className="menu-link">Watched List</NavLink>
+                            <i className="fa-solid fa-circle menu-item__icon"></i>
+                        </li>
+                    </ul>
+                </div>
+            <button className='menu-items__collapsible-toggle-button' onClick={updateClass}><i className="fa-solid fa-bars menu-items__collapsible-toggle-icon" id="hamburger-menu"></i></button>
+
+
+            
         </nav>
+        <div className='navbar__responsive-container' id='navbar__responsive-container'>
+        <div className="navbar__search-bar">
+            <form onSubmit={search} className="search-bar__form">
+                <input className="search-bar__search-input" type="text" name="navbar-searchbar" id="" placeholder="Search Movies or Series" onChange={updateSearch} value={queryValue}/>
+                {/*<input className="search-bar__search-button" type="submit" value="&#xf002"/>*/}
+                <button type="submit" className="search-bar__search-button"><i className="fa-solid fa-magnifying-glass search-bar__search"></i></button>
+            </form>
+        </div>
+
+        <div className="navbar__menu-container">
+            <ul className="menu-container__items-list">
+                <li className={"menu-items__item  menu-items__item-responsive " + (location.pathname === "/myToWatchList" ? "menu-link--active" : "")} >
+                    <NavLink to="/myToWatchList" className="">ToWatch List</NavLink>
+                </li>
+                <li className={"menu-items__item menu-items__item-responsive " + (location.pathname === "/myWatchedList" ? "menu-link--active" : "")}>
+                    <NavLink to="/myWatchedList" className="menu-link">Watched List</NavLink>
+                </li>
+            </ul>
+        </div>
+    </div>
+    </>
   )
 }
 
