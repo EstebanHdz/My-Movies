@@ -372,7 +372,7 @@ const Movie = () => {
                 <div className="rating-edit-modal__inner">
                     <label className="rating-edit-modal__close" htmlFor="rating-edit-modal__state"></label>
                     <div className="rating-edit-modal__content">
-                        <h2 className="main-title">My rating for: <br/><span className="main-title--higlight">Parasite</span></h2>
+                        <h2 className="main-title">My rating for: <br/><span className="main-title--higlight">{movie.Title}</span></h2>
                         <form onSubmit={submitReview} className="rating-edit-modal__form">
                             <fieldset className="rating__demo2">
                                 {
